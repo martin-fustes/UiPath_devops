@@ -24,7 +24,7 @@ jobs:
             'https://uipath.desa.portal.ss/odata/Queues/UiPathODataSvc.AddQueueItem' \
             -H 'accept: application/json' \
             -H 'X-UIPATH-OrganizationUnitId: 1' \
-            -H 'authorization: Bearer $TOKEN' \
+            -H 'authorization: Bearer rt_CED4D626596026FD36A7AA610C27825E6625CFC89093B5C6E05CD9B1B58DDED2-1' \
             -H 'Content-Type: application/json;odata.metadata=minimal;odata.streaming=true' \
             -d '{
             "itemData": {
