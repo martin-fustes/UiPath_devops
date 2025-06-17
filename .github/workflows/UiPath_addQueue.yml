@@ -11,11 +11,12 @@ jobs:
     steps:
       - name: Auth
         run: |
-          TOKEN=$(curl -X POST \
+          RESPONSE=$(curl -X POST \
             'https://cloud.uipath.com/testgqdkglt/identity_/connect/token' \
             -H 'Content-Type: application/x-www-form-urlencoded' \
-            -d "grant_type=client_credentials&client_id=b43421b2-ef24-4119-b474-8547e4aed701&client_secret=9zNFRO!fv#PH3J#S&scope=OR.Queues" \
-            | jq -r '.access_token')
+            -d "grant_type=client_credentials&client_id=b43421b2-ef24-4119-b474-8547e4aed701&client_secret=9zNFRO!fv#PH3J#S&scope=OR.Queues")
+          echo "Auth response: $RESPONSE"
+          TOKEN=$(echo "$RESPONSE" | jq -r '.access_token')
           echo "TOKEN=$TOKEN" >> $GITHUB_ENV
 
       - name: addQueue
