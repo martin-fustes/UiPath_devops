@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI Uipath
 
 on:
   push:
@@ -9,21 +9,25 @@ jobs:
   api_calls:
     runs-on: ubuntu-latest
     steps:
-      - name: Authenticate and use Bearer Token
+      - name: Auth and addQueue
         run: |
           # 1. Auth
           TOKEN=$(curl -X POST \
-            'https://cloud.uipath.com/identity_/connect/authorize' \
+            'https://cloud.uipath.com/testgqdkglt/identity_/connect/authorize' \
             -d "grant_type=client_credentials&client_id=b43421b2-ef24-4119-b474-8547e4aed701&client_secret=9zNFRO!fv#PH3J#S&scope0OR.Queues" | jq -r '.access_token')
-
 
           echo "Received token: $TOKEN"
 
+          curl -X 'GET' \
+            'https://cloud.uipath.com/testgqdkglt/DefaultTenant/orchestrator_/odata/Folders' \
+            -H 'accept: application/json' \
+            -H 'authorization: Bearer rt_CED4D626596026FD36A7AA610C27825E6625CFC89093B5C6E05CD9B1B58DDED2-1'
+          
           # 2. Add queue item
           curl -X POST \
-            'https://uipath.desa.portal.ss/odata/Queues/UiPathODataSvc.AddQueueItem' \
+            'https://cloud.uipath.com/testgqdkglt/DefaultTenant/orchestrator_/odata/Queues/UiPathODataSvc.AddQueueItem' \
             -H 'accept: application/json' \
-            -H 'X-UIPATH-OrganizationUnitId: 1' \
+            -H 'X-UIPATH-OrganizationUnitId: 275862' \
             -H 'authorization: Bearer rt_CED4D626596026FD36A7AA610C27825E6625CFC89093B5C6E05CD9B1B58DDED2-1' \
             -H 'Content-Type: application/json;odata.metadata=minimal;odata.streaming=true' \
             -d '{
