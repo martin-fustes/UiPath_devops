@@ -31,7 +31,7 @@ jobs:
             "itemData": {
               "Name": "devopts",
               "Priority": "Normal",
-              "Reference": "Process_name",
+              "Reference": "${{ github.repository }}",
               "SpecificContent": {
                 "url_repo": "https://github.com/organization/Uipath_devopts.git"
               }
