@@ -25,7 +25,7 @@ jobs:
             'https://cloud.uipath.com/testgqdkglt/DefaultTenant/orchestrator_/odata/Queues/UiPathODataSvc.AddQueueItem' \
             -H 'accept: application/json' \
             -H 'X-UIPATH-OrganizationUnitId: 275862' \
-            -H "authorization: Bearer rt_CED4D626596026FD36A7AA610C27825E6625CFC89093B5C6E05CD9B1B58DDED2-1" \
+            -H "authorization: Bearer $TOKEN" \
             -H 'Content-Type: application/json;odata.metadata=minimal;odata.streaming=true' \
             -d '{
             "itemData": {
