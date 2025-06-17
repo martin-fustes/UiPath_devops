@@ -21,7 +21,7 @@ jobs:
           curl -X 'GET' \
             'https://cloud.uipath.com/testgqdkglt/DefaultTenant/orchestrator_/odata/Folders' \
             -H 'accept: application/json'
-            -H 'authorization: Bearer rt_CED4D626596026FD36A7AA610C27825E6625CFC89093B5C6E05CD9B1B58DDED2-1' \
+            -H 'authorization: Bearer rt_CED4D626596026FD36A7AA610C27825E6625CFC89093B5C6E05CD9B1B58DDED2-1'
           
           # 2. Add queue item
           curl -X POST \
