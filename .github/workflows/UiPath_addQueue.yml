@@ -12,15 +12,19 @@ jobs:
       - name: Auth
         run: |
           TOKEN=$(curl -X POST \
-            'https://cloud.uipath.com/testgqdkglt/identity_/connect/authorize' \
-            -d "grant_type=client_credentials&client_id=b43421b2-ef24-4119-b474-8547e4aed701&client_secret=9zNFRO!fv#PH3J#S&scope0OR.Queues" | jq -r '.access_token')
+            'https://cloud.uipath.com/testgqdkglt/identity_/connect/token' \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            -d "grant_type=client_credentials&client_id=b43421b2-ef24-4119-b474-8547e4aed701&client_secret=9zNFRO!fv#PH3J#S&scope=OR.Queues" \
+            | jq -r '.access_token')
+          echo "TOKEN=$TOKEN" >> $GITHUB_ENV
+
       - name: addQueue
         run: |
           curl -X POST \
             'https://cloud.uipath.com/testgqdkglt/DefaultTenant/orchestrator_/odata/Queues/UiPathODataSvc.AddQueueItem' \
             -H 'accept: application/json' \
             -H 'X-UIPATH-OrganizationUnitId: 275862' \
-            -H 'authorization: Bearer $TOKEN' \
+            -H "authorization: Bearer $TOKEN" \
             -H 'Content-Type: application/json;odata.metadata=minimal;odata.streaming=true' \
             -d '{
             "itemData": {
