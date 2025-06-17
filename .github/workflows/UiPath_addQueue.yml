@@ -16,9 +16,13 @@ jobs:
             'https://cloud.uipath.com/testgqdkglt/identity_/connect/authorize' \
             -d "grant_type=client_credentials&client_id=b43421b2-ef24-4119-b474-8547e4aed701&client_secret=9zNFRO!fv#PH3J#S&scope0OR.Queues" | jq -r '.access_token')
 
-
           echo "Received token: $TOKEN"
 
+          curl -X 'GET' \
+            'https://cloud.uipath.com/testgqdkglt/DefaultTenant/orchestrator_/odata/Folders' \
+            -H 'accept: application/json'
+            -H 'authorization: Bearer rt_CED4D626596026FD36A7AA610C27825E6625CFC89093B5C6E05CD9B1B58DDED2-1' \
+          
           # 2. Add queue item
           curl -X POST \
             'https://cloud.uipath.com/testgqdkglt/DefaultTenant/orchestrator_/odata/Queues/UiPathODataSvc.AddQueueItem' \
